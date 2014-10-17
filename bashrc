@@ -6,10 +6,10 @@ export EDITOR=vim
 export PATH=/usr/local/bin:$PATH;
 export DESKTOP=~/Desktop
 export DROP=~/Dropbox
-export CONFIG=~/Dropbox/resources/myconfig
 export VIRTENVWRAPPER=/usr/local/bin/virtualenvwrapper.sh
 export HOME=~
 export LESSCHARSET=utf-8
+export CONFIG=~/myconfig
 
 if windows; then
   export TOTALCMD=c:\totalcmd\totalcmd.exe
@@ -19,7 +19,7 @@ else
 fi
 
 # 颜色
-if [ ! windows ]; then
+if ! windows; then
   PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;31m\]\w\[\033[00m\]\$ '
   if [ -e /usr/share/terminfo/x/xterm-256color ]; then
     export TERM='xterm-256color'
@@ -37,7 +37,7 @@ set -o vi
 export WORKON_HOME=~/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 if [ -e $VIRTENVWRAPPER ]; then
-  source $VIRENVWRAPPER 
+  source $VIRTENVWRAPPER 
 fi
 
 # 更改目录,并显示目录结构
@@ -49,20 +49,25 @@ change_dir()
 alias g='change_dir'
 
 # 快捷命令
-alias rebash='source $CONFIG/bashrc'
-alias ll='ls -alFhG --show-control-chars'
+alias rebash='source ~/.bashrc'
 alias df='df -h'
+
+if windows; then
+  alias ll='ls -alFhG --show-control-chars'
+else
+  alias ll='ls -alFhG'
+fi
 
 # 快捷路径
 alias desktop='cd $DESKTOP && ll'
 alias work='cd $WORK && ll' 
 alias home='cd $HOME && ll'
-alias drop='cd $DROPBOX && ll'
+alias drop='cd $DROP && ll'
 alias config='cd $CONFIG && ll'
 
 # 快捷编辑
-alias vimrc='gvim $CONFIG/vimrc'
-alias bashrc='vim $CONFIG/bashrc_gitbash'
+alias vimrc='vim ~/.vimrc'
+alias bashrc='vim ~/.bashrc'
 
 #################################################
 ## 将本文件链接到home文件夹中
@@ -102,7 +107,7 @@ if [ -e $HOME/.bashrc ]; then
 fi
 if windows; then
   cd $HOME
-  link .bashrc ./Dropbox/resources/myconfig/bashrc
+  link .bashrc ./myconfig/bashrc
 else
   ln -s $CONFIG/bashrc $HOME/.bashrc
 fi
