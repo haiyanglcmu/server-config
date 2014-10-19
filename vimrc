@@ -1,13 +1,20 @@
 let mapleader="," 
 filetype plugin indent on
+set nocp " 不兼容模式
 
 " 制表符与缩进
-set expandtab
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=4  " how many cols is indented
+set tabstop=4     " how many cols a tab counts for
+set softtabstop=4 " how many cols when tab in insert mode
+set expandtab     " hitting tab in insert mode produces spaces
 set smarttab
 set autoindent
 set cin
+
+" 显示空白字符
+set list!
+set listchars=tab:>-
+
 " 编码，颜色
 set enc=utf-8 
 set termencoding=utf-8
@@ -18,7 +25,6 @@ set background=light
 set t_Co=256
 colo distinguished
 
-set nocp " 不兼容模式
 set fileformats=unix,dos,mac
 set history=700
 set autoread " auto read when a file is changed from the outside 
@@ -64,10 +70,9 @@ if has("autocmd")
         autocmd FileType text setlocal textwidth=78
 
         " jump to the last known cursor position
-        autocmd BufReadPost *
-            \ if line("'\"") > 0 && line("'\"") <= line("$") |
-            \   exe "normal g`\"" |
-            \ endif
+        if has("autocmd")
+            au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+        endif
 
         " Wrap text file
         au BufNewFile,BufRead *.txt setlocal wrap
@@ -106,15 +111,16 @@ nnoremap <leader>k :call GotoFirstLineOnScreen()<cr>
 nnoremap k gk
 nnoremap j gj
 
-" 内容整体移动
-nmap <c-d> gO
+" 删除上下行
 nmap <c-u> mmkdd`m
-
-" move to end in insert mode
-inoremap <c-l> <Esc>A
+nmap <c-d> mmjdd`m
 
 """"
-" 寄存器使用
+" copy and paste
+
+" 将复制的内容粘贴到新行
+nnoremap gp $mmp`ma<cr><esc>^
+nmap gP gpmmkddp`m
 
 " 复制
 nnoremap <leader>yy "*yy " 系统剪贴板
@@ -123,42 +129,53 @@ nnoremap Y y$            " 复制到行尾
 vnoremap y y`]
 
 " 粘贴
-nnoremap <leader>p "*p`]
-nnoremap <leader>P "*P`]
-nnoremap p p`]
-nnoremap P P`]
-vnoremap <leader>p "*p`]
-imap <c-v> <esc>pa
+nnoremap <leader>p "*p`]:w<cr>
+nnoremap <leader>P "*P`]:w<cr>
+nnoremap p p`]:w<cr>
+nnoremap P P`]:w<cr>
+vnoremap <leader>p "*p`]:w<cr>
+imap <c-v> <esc>pa:w<cr>
 
 " 可视模式下通过粘贴进行替换
-vnoremap p "0p
+vnoremap p "0p:w<cr>
 
-" 删除相当于剪切
+" 删除 delete
 nnoremap <leader>dd "*dd:w<cr>
 vnoremap <leader>d "*d
+" remove instead of cut
 nnoremap <leader>rr "_dd
+nnoremap <leader>rl "_S<esc>
 
 """"
-" 自动保存
+" 自动保存 autosave
+
+" 缩进后自动保存
+nnoremap >> >>:w<cr>
+nnoremap << <<:w<cr>
 
 " 重复一个动作后自动保存
 nnoremap . .:w<cr>
 
-" 退出插入模式自动保存
-inoremap <c-[> <c-[>:w<cr>
-
-" 删除一行自动保存
+" 删除后自动保存
 nnoremap dd dd:w<cr>
-
-" 删除字符自动保存
 nnoremap x x:w<cr>
+vnoremap d d:w<cr>
+vnoremap x x:w<cr>
+inoremap <backspace> <backspace><esc>:w<cr>a
 
-" 撤销后自动保存
+" 撤销、恢复后自动保存
 nnoremap u u:w<cr>
+nnoremap <c-r> <c-r>:w<cr>
 
 " 注释后自动保存
 nnoremap gcc gcc:w<cr>
 vnoremap gc gc:w<cr>
+
+" 退出
+inoremap <c-[> <c-[>:w<cr>
+
+" 回车
+inoremap <cr> <cr><esc>:w<cr>a
 
 """"
 " 查找替换
@@ -175,7 +192,7 @@ nnoremap <leader>ra :call ReplaceAll()<cr>
 nnoremap gn :%s///gn<cr>
 
 " 取消搜索结果高亮
-noremap <silent> gl :<c-u>nohlsearch<cr><c-l>
+noremap <silent> gl :<c-u>nohlsearch<cr><c-l>:w<cr>
 
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
@@ -190,16 +207,30 @@ vnoremap <silent> # :<C-U>
             \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 """"
-" 编辑
+" 插入模式 insert mode
+
+inoremap <c-j> <esc>ja
+inoremap <c-k> <esc>ka
+inoremap <c-h> <esc>i
+inoremap <c-l> <esc>la
+
+inoremap <c-i> <esc>I
+inoremap <c-a> <esc>A
+
+inoremap <tab> <esc>>>:w<cr>I
+
+""""
+" 编辑 edit
 
 " 用寄存器内容替换当前单词, replace word
 " nnoremap <leader>rp ""
 
-" delete in insert mode
-inoremap <c-h> <c-h>
-
 " change content between the first pair of parentheses
 nnoremap ci( ^f(ci(
+
+" 防止按 o 换行时自动添加注释
+nnoremap o o<esc>"_S<space><c-h><esc>:w<cr>a
+nnoremap O O<esc>"_S<space><c-h><esc>:w<cr>a
 
 " 添加空行
 nmap gO mmO<esc>`m
@@ -208,23 +239,11 @@ nmap go mmo<esc>`m
 " 上下添加空行
 nnoremap g<space> mmO<esc>`mo<esc>`m
 
-" 将复制的内容粘贴到新行
-nnoremap gp $mmp`ma<cr><esc>^
-nmap gP gpmmkddp`m
-
-" 防止按 o 换行时自动添加注释
-nnoremap o o<esc>"_S
-nnoremap O O<esc>"_S
-
 " 应用宏，然后移动到下一行
 nnoremap <c-a> @qj
 
 " 换行不自动添加注释
 set formatoptions-=or
-
-" 编辑模式下回车开始新的 undo
-" 防止自动加注释
-inoremap <cr> <c-g>u<cr>
 
 " format all
 map <leader>fa mmggVG=`m
@@ -238,7 +257,8 @@ nnoremap <leader><space> a<space><esc>l
 " 快速保存、关闭窗口
 nmap <leader><leader> :w<cr>
 nnoremap <leader>q :q<cr>
-nnoremap <leader>w :tabnew<cr>:tabprevious<cr>:tabclose<cr>:q<cr>
+nnoremap <leader>w :tabclose<cr>
+nnoremap <leader>a :qa<cr>
 
 " 可视模式下移动选中的文本
 vnoremap < <gv
@@ -251,8 +271,8 @@ function! Refactor()
     call inputrestore()
 endfunction
 
-nmap <leader>rr "zyiw:call Refactor()<cr>mx:silent! norm gd<cr>[{V%:s/<C-R>//<c-r>z/g<cr>`x
-
+" rename
+nmap <leader>rn "zyiw:call Refactor()<cr>mx:silent! norm gd<cr>[{V%:s/<C-R>//<c-r>z/g<cr>`x
 
 """"
 " 窗口和标签页 
@@ -352,3 +372,22 @@ map Q <Nop>
 
 " Disable K looking stuff up
 map K <Nop>
+
+""""
+" 配置插件 plugins
+
+" 加载外部配置文件
+function! s:source_rc(path)
+   execute 'source' fnameescape(expand('~/.vim/rc/' . a:path))
+endfunction
+
+set runtimepath+=~/.vim/bundle/neobundle.vim/
+ 
+call neobundle#begin(expand('~/.vim/bundle/'))
+call s:source_rc('neobundle.rc.vim')
+call neobundle#end()
+
+NeoBundleCheck
+ 
+call s:source_rc('plugins.rc.vim')
+call neobundle#call_hook('on_source')
