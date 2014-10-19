@@ -1,5 +1,11 @@
-# 判断是否在windows下
+#!/bin/bash
+
+# check if in windows
 windows() { [[ -n "$WINDIR" ]]; }
+mac() { [[ "$OSTYPE" == "darwin"* ]]; }
+
+# use macvim on mac
+if mac; then alias vim="mvim -v"; fi
 
 export GREP_OPTIONS='--color=auto'
 export EDITOR=vim
@@ -18,7 +24,7 @@ else
   export WORK=~/projects
 fi
 
-# 颜色
+# set color
 if ! windows; then
   PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;31m\]\w\[\033[00m\]\$ '
   if [ -e /usr/share/terminfo/x/xterm-256color ]; then
@@ -28,19 +34,17 @@ if ! windows; then
   fi
 fi
 
-## 使用 vim 方式编辑命令行
+## set vim mode
 set -o vi
 
-###################################################
 ## virtualenvwrapper
-###################################################
 export WORKON_HOME=~/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 if [ -e $VIRTENVWRAPPER ]; then
   source $VIRTENVWRAPPER 
 fi
 
-# 更改目录,并显示目录结构
+## alias setttings
 change_dir()
 {
     cd "$1";
@@ -48,8 +52,7 @@ change_dir()
 };
 alias g='change_dir'
 
-# 快捷命令
-alias rebash='source ~/.bashrc'
+alias rebash='source $CONFIG/bashrc'
 alias df='df -h'
 
 if windows; then
@@ -58,19 +61,18 @@ else
   alias ll='ls -alFhG'
 fi
 
-# 快捷路径
+## shortcuts
 alias desktop='cd $DESKTOP && ll'
 alias work='cd $WORK && ll' 
 alias home='cd $HOME && ll'
 alias drop='cd $DROP && ll'
 alias config='cd $CONFIG && ll'
 
-# 快捷编辑
-alias vimrc='vim ~/.vimrc'
-alias bashrc='vim ~/.bashrc'
+alias vimrc='vim $CONFIG/vimrc'
+alias bashrc='vim $CONFIG/bashrc'
 
 #################################################
-## 将本文件链接到home文件夹中
+## create link on win or unix
 #################################################
 
 # With one parameter, it will check whether the it is a symlink.
@@ -99,22 +101,4 @@ link() {
             ln -s "$2" "$1"
         fi
     fi
-}
-
-# 如果.bashrc存在则删除
-if [ -e $HOME/.bashrc ]; then
-  rm -f $HOME/.bashrc
-fi
-if windows; then
-  cd $HOME
-  link .bashrc ./myconfig/bashrc
-else
-  ln -s $CONFIG/bashrc $HOME/.bashrc
-fi
-
-# gitbash支持输入中文
-fix_cn() {
-  config=$(printf "\nset meta-flag on\nset input-meta on\nset output-meta on\nset convert-meta off")
-  tmp=$(cat /etc/inputrc)$config
-  echo "$tmp" > /etc/inputrc
 }
