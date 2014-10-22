@@ -6,7 +6,6 @@ endfunction
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neocomplete.vim', { 'insert'  : 1 }
 
 NeoBundle 'scrooloose/nerdtree'

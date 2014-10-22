@@ -6,7 +6,7 @@ imap <silent>K <Plug>(neosnippet_expand_or_jump)
 smap <silent>K <Plug>(neosnippet_expand_or_jump)
 
 imap <silent>G <Plug>(neosnippet_expand)
-imap <silent>S <Plug>(neosnippet_start_unite_snippet)
+" imap <silent>S <Plug>(neosnippet_start_unite_snippet)
 xmap <silent>U <Plug>(neosnippet_expand_target)
 
 let g:neosnippet#snippets_directory = '~/.vim/snippets'
