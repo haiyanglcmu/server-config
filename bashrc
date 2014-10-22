@@ -16,7 +16,7 @@ export DROP=~/Dropbox
 export VIRTENVWRAPPER=/usr/local/bin/virtualenvwrapper.sh
 export HOME=~
 export LESSCHARSET=utf-8
-export CONFIG=$DROP/personal/myconfig
+export CONFIG=$DROP/myconfig
 export TMP=~/tmp/
 
 if windows; then
