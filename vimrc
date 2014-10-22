@@ -1,33 +1,59 @@
-let mapleader="," 
+""""
+" 加载、配置插件 plugins
+
+" 加载外部配置文件
+function! s:source_rc(path)
+  execute 'source' fnameescape(expand('~/.vim/rc/' . a:path))
+endfunction
+
+if has('vim_starting')
+  set nocp " 不兼容模式
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+call neobundle#begin(expand('~/.vim/bundle/'))
+call s:source_rc('neobundle.rc.vim')
+call neobundle#end()
+
+NeoBundleCheck
+
+" 插件配置
+call s:source_rc('plugins.rc.vim')
+call neobundle#call_hook('on_source')
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let mapleader="\\"
 filetype plugin indent on
-set nocp " 不兼容模式
 
 " 制表符与缩进
-set shiftwidth=4  " how many cols is indented
+set smartindent
 set tabstop=4     " how many cols a tab counts for
+set shiftwidth=4  " how many cols is indented
 set softtabstop=4 " how many cols when tab in insert mode
 set expandtab     " hitting tab in insert mode produces spaces
 set smarttab
-set autoindent
-set cin
 
 " 显示空白字符
 set list!
 set listchars=tab:>-
 
-" 编码，颜色
-set enc=utf-8 
+" 编码，颜色，字体 encoding, colors, fonts
+set enc=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8 " 新建文件使用的编码
 set fencs=ucs-bom,utf-8,chinese
 set ambiwidth=single
-set background=light
+set guifont=Literation\ Mono\ Powerline:h16
+
 set t_Co=256
-colo distinguished
+syntax enable
+set background=light
+colo solarized
 
 set fileformats=unix,dos,mac
 set history=700
-set autoread " auto read when a file is changed from the outside 
+set autoread " auto read when a file is changed from the outside
 set backspace=indent,eol,start
 set nobackup
 set nowb
@@ -49,13 +75,14 @@ set hls
 set is
 set ignorecase
 set smartcase
+" exit visual mode with no delay
+set timeoutlen=1000 ttimeoutlen=0
 
-if has('syntax') && !exists('g:syntax_on')
-    syntax enable
-endif
+" hide buffer with unsaved changes instead of closing it
+set hidden
 
 if has("gui_running")
-    set guioptions-=T 
+    set guioptions-=T
 endif
 
 " 滚屏设置
@@ -67,31 +94,31 @@ if has("autocmd")
     augroup vimrcEx
         au!
 
-        autocmd FileType text setlocal textwidth=78
+        autocmd FileType text setlocal textwidth=78 wrap linebreak
 
         " jump to the last known cursor position
         if has("autocmd")
             au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
         endif
 
-        " Wrap text file
-        au BufNewFile,BufRead *.txt setlocal wrap
+        " indent by filetype
+        au FileType python     setl ts=2 sw=2 sts=2 et
+        au FileType javascript setl ts=2 sw=2 sts=2 et
+        au FileType vim        setl ts=2 sw=2 sts=2 et
+        au FileType html       setl ts=2 sw=2 sts=2 et
+        au FileType css        setl ts=2 sw=2 sts=2 et
+        au FileType scss        setl ts=2 sw=2 sts=2 et
+        au FileType sh         setl ts=2 sw=2 sts=2 et
     augroup END
 endif
 
 """"
 " 快速移动
 
-nnoremap <Down> 2<C-e>
-nnoremap <Up> 2<C-y>
-nnoremap <c-j> 5j
-nnoremap <c-k> 5k
-nnoremap <c-e> 10b
-nnoremap <c-y> 10w
-vnoremap <c-j> 5j
-vnoremap <c-k> 5k
-vnoremap <c-e> 10b
-vnoremap <c-y> 10w
+nnoremap <Down>   5<C-e>
+nnoremap <Up>     5<C-y>
+nnoremap <C-j> 5j
+nnoremap <C-k> 5k
 
 " 移动到屏幕最后一行
 function! GotoLastLineOnScreen()
@@ -129,15 +156,15 @@ nnoremap Y y$            " 复制到行尾
 vnoremap y y`]
 
 " 粘贴
-nnoremap <leader>p "*p`]:w<cr>
-nnoremap <leader>P "*P`]:w<cr>
-nnoremap p p`]:w<cr>
-nnoremap P P`]:w<cr>
-vnoremap <leader>p "*p`]:w<cr>
-imap <c-v> <esc>pa:w<cr>
+nnoremap p         p`]
+nnoremap P         P`]
+nnoremap <leader>p "*p`]
+nnoremap <leader>P "*P`]
+vnoremap <leader>p "*p`]
+imap     <c-v>     <esc>pa
 
 " 可视模式下通过粘贴进行替换
-vnoremap p "0p:w<cr>
+vnoremap p "0p
 
 " 删除 delete
 nnoremap <leader>dd "*dd:w<cr>
@@ -147,38 +174,9 @@ nnoremap <leader>rr "_dd
 nnoremap <leader>rl "_S<esc>
 
 """"
-" 自动保存 autosave
-
-" 缩进后自动保存
-nnoremap >> >>:w<cr>
-nnoremap << <<:w<cr>
-
-" 重复一个动作后自动保存
-nnoremap . .:w<cr>
-
-" 删除后自动保存
-nnoremap dd dd:w<cr>
-nnoremap x x:w<cr>
-vnoremap d d:w<cr>
-vnoremap x x:w<cr>
-inoremap <backspace> <backspace><esc>:w<cr>a
-
-" 撤销、恢复后自动保存
-nnoremap u u:w<cr>
-nnoremap <c-r> <c-r>:w<cr>
-
-" 注释后自动保存
-nnoremap gcc gcc:w<cr>
-vnoremap gc gc:w<cr>
-
-" 退出
-inoremap <c-[> <c-[>:w<cr>
-
-" 回车
-inoremap <cr> <cr><esc>:w<cr>a
-
-""""
 " 查找替换
+
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " 替换所有
 function! ReplaceAll()
@@ -209,18 +207,20 @@ vnoremap <silent> # :<C-U>
 """"
 " 插入模式 insert mode
 
-inoremap <c-j> <esc>ja
-inoremap <c-k> <esc>ka
-inoremap <c-h> <esc>i
-inoremap <c-l> <esc>la
+" start new undo
+inoremap <cr> <c-g>u<cr>
 
-inoremap <c-i> <esc>I
-inoremap <c-a> <esc>A
-
-inoremap <tab> <esc>>>:w<cr>I
+" 插入模式下前后移动
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+inoremap <C-b> <esc>I
+inoremap <C-e> <esc>A
 
 """"
 " 编辑 edit
+
+" 删除trailing spaces
+nnoremap <leader>$ :s/\s\+$//<cr>$:w<cr>
 
 " 用寄存器内容替换当前单词, replace word
 " nnoremap <leader>rp ""
@@ -251,7 +251,7 @@ map <leader>fa mmggVG=`m
 " 断行
 nnoremap <leader><cr> Do<esc>p^==
 
-" 添加空格并移动到下一个字符 
+" 添加空格并移动到下一个字符
 nnoremap <leader><space> a<space><esc>l
 
 " 快速保存、关闭窗口
@@ -275,24 +275,33 @@ endfunction
 nmap <leader>rn "zyiw:call Refactor()<cr>mx:silent! norm gd<cr>[{V%:s/<C-R>//<c-r>z/g<cr>`x
 
 """"
-" 窗口和标签页 
+" splits, tabs, buffers
 
-" 在右侧打开 
+" splits
+nnoremap <Leader>swh :topleft  vsp<cr>
+nnoremap <Leader>swl :botright vsp<cr>
+nnoremap <Leader>swj :botright sp<cr>
+nnoremap <Leader>swk :topleft  sp<cr>
+
+nnoremap <Leader>sh  :leftabove  vsp<cr>
+nnoremap <Leader>sl  :rightbelow vsp<cr>
+nnoremap <Leader>sj  :rightbelow  sp<cr>
+nnoremap <Leader>sk  :leftabove   sp<cr>
+
+" 在右侧打开
 set splitright
 
-" 切换窗口 
+" 切换窗口
 nnoremap <c-l> <c-w>l
 nnoremap <c-h> <c-w>h
+nnoremap <C-Down> <c-w>j
+nnoremap <C-Up> <c-w>k
 
-" 打开标签页
-map <leader>e :tabedit 
-map <leader>n :tabnew<cr>
-
-" 切换标签页 switching tabs
-nmap <Left> :tabprevious<cr>
-nmap <Right> :tabnext<cr>
-vmap <Left> <esc>:tabprevious<cr>
-vmap <Right> <esc>:tabnext<cr>
+" switching buffers
+nmap <Left>  :bp<cr>
+nmap <Right> :bn<cr>
+vmap <Left>  <esc>:bp<cr>
+vmap <Right> <esc>:bn<cr>
 
 " 将窗口移动到标签页
 function! MoveToPrevTab()
@@ -348,12 +357,12 @@ function! MoveTab(direction)
         let pos = tabpagenr() - 2
         if pos < 0
             let l:position = 0
-        else 
+        else
             let l:position = pos
         endif
     elseif a:direction == 1
         let l:position = tabpagenr()
-    endif 
+    endif
     exec 'tabm ' . l:position
 endfunction
 
@@ -363,6 +372,8 @@ nnoremap <silent> <c-right> :call MoveTab(1) <cr>
 " 改变 split 大小
 nnoremap - 5<c-w><
 nnoremap = 5<c-w>>
+nnoremap _ 5<c-w>-
+nnoremap + 5<c-w>+
 
 """"
 " 其他
@@ -373,21 +384,10 @@ map Q <Nop>
 " Disable K looking stuff up
 map K <Nop>
 
-""""
-" 配置插件 plugins
+set noimdisable
+autocmd! InsertLeave * set imdisable|set iminsert=0
+autocmd! InsertEnter * set noimdisable|set iminsert=0
 
-" 加载外部配置文件
-function! s:source_rc(path)
-   execute 'source' fnameescape(expand('~/.vim/rc/' . a:path))
-endfunction
 
-set runtimepath+=~/.vim/bundle/neobundle.vim/
- 
-call neobundle#begin(expand('~/.vim/bundle/'))
-call s:source_rc('neobundle.rc.vim')
-call neobundle#end()
-
-NeoBundleCheck
- 
-call s:source_rc('plugins.rc.vim')
-call neobundle#call_hook('on_source')
+autocmd BufRead,BufNewFile *.mkd,*.markdown,*.md,*.mdown,*.mkdn
+  \ setlocal wrap linebreak filetype=markdown autoindent formatoptions=tcroqn2 comments=n:>

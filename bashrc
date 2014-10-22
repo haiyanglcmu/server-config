@@ -17,6 +17,7 @@ export VIRTENVWRAPPER=/usr/local/bin/virtualenvwrapper.sh
 export HOME=~
 export LESSCHARSET=utf-8
 export CONFIG=$DROP/personal/myconfig
+export TMP=~/tmp/
 
 if windows; then
   export TOTALCMD=c:\totalcmd\totalcmd.exe
@@ -68,6 +69,7 @@ alias work='cd $WORK && ll'
 alias home='cd $HOME && ll'
 alias drop='cd $DROP && ll'
 alias config='cd $CONFIG && ll'
+alias tmp='cd $TMP && ll'
 
 alias vimrc='vim $CONFIG/vimrc'
 alias bashrc='vim $CONFIG/bashrc'
