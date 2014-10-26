@@ -76,7 +76,7 @@ set is
 set ignorecase
 set smartcase
 " exit visual mode with no delay
-set timeoutlen=1000 ttimeoutlen=0
+set timeoutlen=1000 ttimeoutlen=10
 
 " hide buffer with unsaved changes instead of closing it
 set hidden

@@ -108,8 +108,8 @@ inoremap <expr><C-b>  pumvisible() ? "\<PageUp>"   : "\<Left>"
 inoremap <expr><C-y>  pumvisible() ? neocomplete#close_popup() :  "\<C-r>\""
 " <C-e>: close popup.
 inoremap <expr><C-e>  pumvisible() ? neocomplete#cancel_popup() : "\<End>"
-" <C-k>: unite completion.
-imap <C-k>  <Plug>(neocomplete_start_unite_complete)
+" <C-k>: unite completion. --> this is used by neosnippet
+" imap <C-k>  <Plug>(neocomplete_start_unite_complete)
 
 " <C-h>, <BS>: close popup and delete backword char.
 " inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
