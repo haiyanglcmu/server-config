@@ -163,7 +163,6 @@
 :NeoSnippetEdit	neosnippet.txt	/*:NeoSnippetEdit*
 :NeoSnippetMakeCache	neosnippet.txt	/*:NeoSnippetMakeCache*
 :NeoSnippetSource	neosnippet.txt	/*:NeoSnippetSource*
-:PrevimOpen	previm.txt	/*:PrevimOpen*
 <Plug>(neocomplete_start_quick_match)	neocomplete.txt	/*<Plug>(neocomplete_start_quick_match)*
 <Plug>(neocomplete_start_unite_complete)	neocomplete.txt	/*<Plug>(neocomplete_start_unite_complete)*
 <Plug>(neosnippet_expand)	neosnippet.txt	/*<Plug>(neosnippet_expand)*
@@ -411,10 +410,6 @@ g:neosnippet#enable_snipmate_compatibility	neosnippet.txt	/*g:neosnippet#enable_
 g:neosnippet#expand_word_boundary	neosnippet.txt	/*g:neosnippet#expand_word_boundary*
 g:neosnippet#scope_aliases	neosnippet.txt	/*g:neosnippet#scope_aliases*
 g:neosnippet#snippets_directory	neosnippet.txt	/*g:neosnippet#snippets_directory*
-g:previm_custom_css_path	previm.txt	/*g:previm_custom_css_path*
-g:previm_disable_default_css	previm.txt	/*g:previm_disable_default_css*
-g:previm_enable_realtime	previm.txt	/*g:previm_enable_realtime*
-g:previm_open_cmd	previm.txt	/*g:previm_open_cmd*
 g:unite_source_neobundle_install_max_processes	neobundle.txt	/*g:unite_source_neobundle_install_max_processes*
 gc	commentary.txt	/*gc*
 gcc	commentary.txt	/*gcc*
@@ -649,18 +644,6 @@ o_[%	matchit.txt	/*o_[%*
 o_]%	matchit.txt	/*o_]%*
 o_g%	matchit.txt	/*o_g%*
 o_gc	commentary.txt	/*o_gc*
-previm#open()	previm.txt	/*previm#open()*
-previm#refresh()	previm.txt	/*previm#refresh()*
-previm-changelog	previm.txt	/*previm-changelog*
-previm-command	previm.txt	/*previm-command*
-previm-contents	previm.txt	/*previm-contents*
-previm-depends	previm.txt	/*previm-depends*
-previm-functions	previm.txt	/*previm-functions*
-previm-introduction	previm.txt	/*previm-introduction*
-previm-openbrowser	previm.txt	/*previm-openbrowser*
-previm-settings	previm.txt	/*previm-settings*
-previm-usage	previm.txt	/*previm-usage*
-previm.txt	previm.txt	/*previm.txt*
 remove_statusline_func	airline.txt	/*remove_statusline_func*
 s_<Plug>(neosnippet_expand)	neosnippet.txt	/*s_<Plug>(neosnippet_expand)*
 s_<Plug>(neosnippet_expand_or_jump)	neosnippet.txt	/*s_<Plug>(neosnippet_expand_or_jump)*

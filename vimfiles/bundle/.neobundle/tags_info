@@ -8,12 +8,10 @@ neocomplete.vim
 neosnippet-snippets
 neosnippet.vim
 nerdtree
-previm
 vim-airline
 vim-auto-save
 vim-colors-solarized
 vim-commentary
 vim-javascript-syntax
-vim-markdown
 vim-repeat
 vim-surround
