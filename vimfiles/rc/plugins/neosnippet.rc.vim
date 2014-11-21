@@ -3,7 +3,7 @@
 " xmap <silent>L <Plug>(neosnippet_start_unite_snippet_target)
 
 imap <silent><c-k> <Plug>(neosnippet_expand_or_jump)
-" smap <silent>K <Plug>(neosnippet_expand_or_jump)
+smap <silent><c-k> <Plug>(neosnippet_expand_or_jump)
 
 " imap <silent>G <Plug>(neosnippet_expand)
 " imap <silent>S <Plug>(neosnippet_start_unite_snippet)

@@ -36,3 +36,4 @@ NeoBundleLazy 'bkad/CamelCaseMotion', {
 NeoBundle 'vim-scripts/vim-auto-save'
 NeoBundle 'vim-scripts/bufkill.vim/'
 NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'walm/jshint.vim'

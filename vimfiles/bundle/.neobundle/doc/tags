@@ -112,6 +112,7 @@
 :CtrlPRoot	ctrlp.txt	/*:CtrlPRoot*
 :CtrlPTag	ctrlp.txt	/*:CtrlPTag*
 :CtrlPUndo	ctrlp.txt	/*:CtrlPUndo*
+:JSHint	jshint.txt	/*:JSHint*
 :MatchDebug	matchit.txt	/*:MatchDebug*
 :NERDTree	NERD_tree.txt	/*:NERDTree*
 :NERDTreeCWD	NERD_tree.txt	/*:NERDTreeCWD*
@@ -173,6 +174,7 @@ ClearAllCtrlPCaches	ctrlp.txt	/*ClearAllCtrlPCaches*
 ClearCtrlPCache	ctrlp.txt	/*ClearCtrlPCache*
 ControlP	ctrlp.txt	/*ControlP*
 CtrlP	ctrlp.txt	/*CtrlP*
+LICENSE	jshint.txt	/*LICENSE*
 MatchError	matchit.txt	/*MatchError*
 NERDTree	NERD_tree.txt	/*NERDTree*
 NERDTree-?	NERD_tree.txt	/*NERDTree-?*
@@ -418,6 +420,9 @@ gcu	commentary.txt	/*gcu*
 i_<Plug>(neosnippet_start_unite_snippet)	neosnippet.txt	/*i_<Plug>(neosnippet_start_unite_snippet)*
 i_CTRL-G_S	surround.txt	/*i_CTRL-G_S*
 i_CTRL-G_s	surround.txt	/*i_CTRL-G_s*
+jshint	jshint.txt	/*jshint*
+jshint-author	jshint.txt	/*jshint-author*
+jshint.vim	jshint.txt	/*jshint.vim*
 matchit	matchit.txt	/*matchit*
 matchit-%	matchit.txt	/*matchit-%*
 matchit-\1	matchit.txt	/*matchit-\\1*
