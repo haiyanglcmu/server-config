@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 # only on mac
 if [ "$(uname)" == "Darwin"  ]; then
     maven=~/opt/apache-maven-3.3.3/bin
@@ -13,28 +11,41 @@ if [ "$(uname)" == "Darwin"  ]; then
     alias work='cd $WORK && ll'
     alias desktop='cd $DESKTOP && ll'
     alias reconfig='. ~/.zshrc'
+else
+    opt_dir=/home/$USER/opt
+    python_version=3.5.0
+    python3=$opt_dir/python$python_version/bin
+    vim=$opt_dir/vim74/bin
+
+    export PATH=$vim:$python3:$PATH
 fi
 
 export GREP_OPTIONS='--color=auto'
+
 # set vim mode
 set -o vi
+
 # set color
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@$(scutil --get ComputerName)\[\033[00m\]:\[\033[01;31m\]\w\[\033[00m\]\$ '
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;31m\]\w\[\033[00m\]\$ '
 if [ -e /usr/share/terminfo/x/xterm-256color ]; then
   export TERM='xterm-256color'
 else
   export TERM='xterm-color'
 fi
+
 # virtualenvwrapper
 export VIRTENVWRAPPER=/usr/local/bin/virtualenvwrapper.sh
 export WORKON_HOME=~/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+if [ "$(uname)" == "Darwin"  ]; then
+  export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+else
+  export VIRTUALENVWRAPPER_PYTHON=$python3/python3
+fi
 if [ -e $VIRTENVWRAPPER ]; then
   source $VIRTENVWRAPPER
 fi
 
 alias home='cd ~ && ll'
-alias config='cd ~/server-config/ && ll'
 alias ll='ls -alFhG'
 
 change_dir()

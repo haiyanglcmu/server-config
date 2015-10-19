@@ -3,7 +3,16 @@ function! IsMac()
          \   (!executable('xdg-open') && system('uname') =~? '^darwin'))
 endfunction
 
-NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/vimproc.vim', {
+      \ 'build' : {
+      \     'windows' : 'tools\\update-dll-mingw',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make',
+      \     'linux' : 'make',
+      \     'unix' : 'gmake',
+      \    },
+      \ }
+
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neocomplete.vim', { 'insert'  : 1 }

@@ -97,7 +97,7 @@ let g:neocomplete#sources#vim#complete_functions = {
       \ 'VimFiler' : 'vimfiler#complete',
       \ 'Vinarise' : 'vinarise#complete',
       \}
-call neocomplete#custom#source('look', 'min_pattern_length', 4)
+" call neocomplete#custom#source('look', 'min_pattern_length', 4)
 " call neocomplete#custom#source('_', 'sorters', [])
 
 " mappings."{{{
