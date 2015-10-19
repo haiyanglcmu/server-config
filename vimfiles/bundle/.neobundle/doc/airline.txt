@@ -126,6 +126,11 @@ values):
   heavily) >
   let g:airline_exclude_preview = 0
 <
+* disable the Airline customization for selective windows (this is a
+  window-local variable so you can disable it for only some windows) >
+  let w:airline_disabled = 1
+<
+
 ==============================================================================
 COMMANDS                                                  *airline-commands*
 
@@ -390,6 +395,9 @@ eclim <https://eclim.org>
 <
 * enable/disable displaying buffers with a single tab. >
   let g:airline#extensions#tabline#show_buffers = 1
+<
+* enable/disable displaying tabs, regardless of number. >
+  let g:airline#extensions#tabline#show_tabs = 1
 <
 * configure filename match rules to exclude from the tabline. >
   let g:airline#extensions#tabline#excludes = []
@@ -787,7 +795,7 @@ Contributions and pull requests are welcome.
 ==============================================================================
 LICENSE                                                    *airline-license*
 
-MIT License.  Copyright © 2013-2014 Bailey Ling.
+MIT License.  Copyright © 2013-2015 Bailey Ling.
 
 
  vim:tw=78:ts=8:ft=help:norl:

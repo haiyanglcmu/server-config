@@ -164,6 +164,7 @@
 :NeoSnippetEdit	neosnippet.txt	/*:NeoSnippetEdit*
 :NeoSnippetMakeCache	neosnippet.txt	/*:NeoSnippetMakeCache*
 :NeoSnippetSource	neosnippet.txt	/*:NeoSnippetSource*
+:PrevimOpen	previm.txt	/*:PrevimOpen*
 <Plug>(neocomplete_start_quick_match)	neocomplete.txt	/*<Plug>(neocomplete_start_quick_match)*
 <Plug>(neocomplete_start_unite_complete)	neocomplete.txt	/*<Plug>(neocomplete_start_unite_complete)*
 <Plug>(neosnippet_expand)	neosnippet.txt	/*<Plug>(neosnippet_expand)*
@@ -296,6 +297,7 @@ b:match_word	matchit.txt	/*b:match_word*
 b:match_words	matchit.txt	/*b:match_words*
 b:neocomplete_sources	neocomplete.txt	/*b:neocomplete_sources*
 before	solarized.txt	/*before*
+cS	surround.txt	/*cS*
 camelcasemotion-configuration	camelcasemotion.txt	/*camelcasemotion-configuration*
 camelcasemotion-dependencies	camelcasemotion.txt	/*camelcasemotion-dependencies*
 camelcasemotion-description	camelcasemotion.txt	/*camelcasemotion-description*
@@ -334,6 +336,7 @@ g:ctrlp_mru_files	ctrlp.txt	/*g:ctrlp_mru_files*
 g:ctrlp_open_multi	ctrlp.txt	/*g:ctrlp_open_multi*
 g:ctrlp_persistent_input	ctrlp.txt	/*g:ctrlp_persistent_input*
 g:ctrlp_regexp_search	ctrlp.txt	/*g:ctrlp_regexp_search*
+g:neobundle#cache_file	neobundle.txt	/*g:neobundle#cache_file*
 g:neobundle#default_options	neobundle.txt	/*g:neobundle#default_options*
 g:neobundle#default_site	neobundle.txt	/*g:neobundle#default_site*
 g:neobundle#enable_name_conversion	neobundle.txt	/*g:neobundle#enable_name_conversion*
@@ -371,12 +374,10 @@ g:neocomplete#enable_cursor_hold_i	neocomplete.txt	/*g:neocomplete#enable_cursor
 g:neocomplete#enable_fuzzy_completion	neocomplete.txt	/*g:neocomplete#enable_fuzzy_completion*
 g:neocomplete#enable_ignore_case	neocomplete.txt	/*g:neocomplete#enable_ignore_case*
 g:neocomplete#enable_insert_char_pre	neocomplete.txt	/*g:neocomplete#enable_insert_char_pre*
-g:neocomplete#enable_prefetch	neocomplete.txt	/*g:neocomplete#enable_prefetch*
-g:neocomplete#enable_refresh_always	neocomplete.txt	/*g:neocomplete#enable_refresh_always*
+g:neocomplete#enable_multibyte_completion	neocomplete.txt	/*g:neocomplete#enable_multibyte_completion*
 g:neocomplete#enable_smart_case	neocomplete.txt	/*g:neocomplete#enable_smart_case*
 g:neocomplete#fallback_mappings	neocomplete.txt	/*g:neocomplete#fallback_mappings*
 g:neocomplete#force_omni_input_patterns	neocomplete.txt	/*g:neocomplete#force_omni_input_patterns*
-g:neocomplete#force_overwrite_completefunc	neocomplete.txt	/*g:neocomplete#force_overwrite_completefunc*
 g:neocomplete#ignore_composite_filetypes	neocomplete.txt	/*g:neocomplete#ignore_composite_filetypes*
 g:neocomplete#ignore_source_files	neocomplete.txt	/*g:neocomplete#ignore_source_files*
 g:neocomplete#keyword_patterns	neocomplete.txt	/*g:neocomplete#keyword_patterns*
@@ -412,6 +413,10 @@ g:neosnippet#enable_snipmate_compatibility	neosnippet.txt	/*g:neosnippet#enable_
 g:neosnippet#expand_word_boundary	neosnippet.txt	/*g:neosnippet#expand_word_boundary*
 g:neosnippet#scope_aliases	neosnippet.txt	/*g:neosnippet#scope_aliases*
 g:neosnippet#snippets_directory	neosnippet.txt	/*g:neosnippet#snippets_directory*
+g:previm_custom_css_path	previm.txt	/*g:previm_custom_css_path*
+g:previm_disable_default_css	previm.txt	/*g:previm_disable_default_css*
+g:previm_enable_realtime	previm.txt	/*g:previm_enable_realtime*
+g:previm_open_cmd	previm.txt	/*g:previm_open_cmd*
 g:unite_source_neobundle_install_max_processes	neobundle.txt	/*g:unite_source_neobundle_install_max_processes*
 gc	commentary.txt	/*gc*
 gcc	commentary.txt	/*gcc*
@@ -463,6 +468,7 @@ neobundle#has_fresh_cache()	neobundle.txt	/*neobundle#has_fresh_cache()*
 neobundle#hooks	neobundle.txt	/*neobundle#hooks*
 neobundle#is_installed()	neobundle.txt	/*neobundle#is_installed()*
 neobundle#is_sourced()	neobundle.txt	/*neobundle#is_sourced()*
+neobundle#load_toml()	neobundle.txt	/*neobundle#load_toml()*
 neobundle#local()	neobundle.txt	/*neobundle#local()*
 neobundle#rc()	neobundle.txt	/*neobundle#rc()*
 neobundle#source()	neobundle.txt	/*neobundle#source()*
@@ -558,7 +564,6 @@ neocomplete-filter-attribute-filter	neocomplete.txt	/*neocomplete-filter-attribu
 neocomplete-filter-attribute-name	neocomplete.txt	/*neocomplete-filter-attribute-name*
 neocomplete-filter-attributes	neocomplete.txt	/*neocomplete-filter-attributes*
 neocomplete-filter-converter_abbr	neocomplete.txt	/*neocomplete-filter-converter_abbr*
-neocomplete-filter-converter_case	neocomplete.txt	/*neocomplete-filter-converter_case*
 neocomplete-filter-converter_default	neocomplete.txt	/*neocomplete-filter-converter_default*
 neocomplete-filter-converter_delimiter	neocomplete.txt	/*neocomplete-filter-converter_delimiter*
 neocomplete-filter-converter_disable_abbr	neocomplete.txt	/*neocomplete-filter-converter_disable_abbr*
@@ -649,6 +654,18 @@ o_[%	matchit.txt	/*o_[%*
 o_]%	matchit.txt	/*o_]%*
 o_g%	matchit.txt	/*o_g%*
 o_gc	commentary.txt	/*o_gc*
+previm#open()	previm.txt	/*previm#open()*
+previm#refresh()	previm.txt	/*previm#refresh()*
+previm-changelog	previm.txt	/*previm-changelog*
+previm-command	previm.txt	/*previm-command*
+previm-contents	previm.txt	/*previm-contents*
+previm-depends	previm.txt	/*previm-depends*
+previm-functions	previm.txt	/*previm-functions*
+previm-introduction	previm.txt	/*previm-introduction*
+previm-openbrowser	previm.txt	/*previm-openbrowser*
+previm-settings	previm.txt	/*previm-settings*
+previm-usage	previm.txt	/*previm-usage*
+previm.txt	previm.txt	/*previm.txt*
 remove_statusline_func	airline.txt	/*remove_statusline_func*
 s_<Plug>(neosnippet_expand)	neosnippet.txt	/*s_<Plug>(neosnippet_expand)*
 s_<Plug>(neosnippet_expand_or_jump)	neosnippet.txt	/*s_<Plug>(neosnippet_expand_or_jump)*
@@ -689,7 +706,6 @@ vim-colors-solarized	solarized.txt	/*vim-colors-solarized*
 without	solarized.txt	/*without*
 x_<Plug>(neosnippet_expand_target)	neosnippet.txt	/*x_<Plug>(neosnippet_expand_target)*
 x_<Plug>(neosnippet_register_oneshot_snippet)	neosnippet.txt	/*x_<Plug>(neosnippet_register_oneshot_snippet)*
-x_<Plug>(neosnippet_start_unite_snippet_target)	neosnippet.txt	/*x_<Plug>(neosnippet_start_unite_snippet_target)*
 yS	surround.txt	/*yS*
 ySS	surround.txt	/*ySS*
 ys	surround.txt	/*ys*

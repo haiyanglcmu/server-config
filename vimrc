@@ -49,7 +49,7 @@ set guifont=Literation\ Mono\ Powerline:h16
 set t_Co=256
 syntax enable
 set background=light
-colo solarized
+colo distinguished
 
 set fileformats=unix,dos,mac
 set history=700
@@ -75,6 +75,8 @@ set hls
 set is
 set ignorecase
 set smartcase
+set mouse=a
+set ttymouse=xterm2
 " exit visual mode with no delay
 set timeoutlen=1000 ttimeoutlen=10
 
@@ -211,10 +213,11 @@ vnoremap <silent> # :<C-U>
 inoremap <cr> <c-g>u<cr>
 
 " 插入模式下前后移动
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
 inoremap <C-b> <esc>I
-inoremap <C-e> <esc>A
+" inoremap <C-e> <esc>A
+
+" 在行尾添加分号
+inoremap <C-e> <esc>A;<esc>
 
 """"
 " 编辑 edit
@@ -292,10 +295,10 @@ nnoremap <Leader>sk  :leftabove   sp<cr>
 set splitright
 
 " 切换窗口
-nnoremap <c-l> <c-w>l
-nnoremap <c-h> <c-w>h
-nnoremap <C-Down> <c-w>j
-nnoremap <C-Up> <c-w>k
+" nnoremap <c-l> <c-w>l
+" nnoremap <c-h> <c-w>h
+" nnoremap <C-Down> <c-w>j
+" nnoremap <C-Up> <c-w>k
 
 " switching buffers
 nmap <Left>  :bp<cr>
