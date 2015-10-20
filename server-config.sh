@@ -92,8 +92,4 @@ git clone https://github.com/Shougo/neobundle.vim $home_dir/.vim/bundle/neobundl
 git clone https://github.com/Lokaltog/powerline-fonts.git $config_dir/vimfiles/powerline-fonts
 $config_dir/vimfiles/powerline-fonts/install.sh
 
-mv ~/.vim/bundle/neobundle.vim ~/.vim/
-rm -rf ~/.vim/bundle/*
-mv ~/.vim/neobundle.vim ~/.vim/bundle/
-
 ~/.vim/bundle/neobundle.vim/bin/neoinstall
