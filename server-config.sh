@@ -80,7 +80,9 @@ vim_install_dir=$home_dir/opt/vim74
 
 ## link vimrc and vimfiles
 ln -s $config_dir/vimrc $home_dir/.vimrc
-ln -s $config_dir/vimfiles $home_dir/.vim
+if ! [[ -e "$home_dir/.vim" ]]; then
+  ln -s $config_dir/vimfiles $home_dir/.vim
+fi
 
 ## get neobundle
 mkdir -p ~/.vim/bundle
@@ -89,3 +91,9 @@ git clone https://github.com/Shougo/neobundle.vim $home_dir/.vim/bundle/neobundl
 ## install powerline fonts
 git clone https://github.com/Lokaltog/powerline-fonts.git $config_dir/vimfiles/powerline-fonts
 $config_dir/vimfiles/powerline-fonts/install.sh
+
+mv ~/.vim/bundle/neobundle.vim ~/.vim/
+rm -rf ~/.vim/bundle/*
+mv ~/.vim/neobundle.vim ~/.vim/bundle/
+
+~/.vim/bundle/neobundle.vim/bin/neoinstall
