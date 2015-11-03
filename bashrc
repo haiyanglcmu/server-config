@@ -1,5 +1,5 @@
 # only on mac
-if [ "$(uname)" == "Darwin"  ]; then
+if [[ "$(uname)" = "Darwin"  ]]; then
     maven=~/opt/apache-maven-3.3.3/bin
     activator=~/opt/activator-dist-1.3.6
     export PATH=$activator:$maven:$PATH
@@ -28,7 +28,9 @@ export GREP_OPTIONS='--color=auto'
 set -o vi
 
 # set color
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;31m\]\w\[\033[00m\]\$ '
+if ! [[ "$(uname)" = "Darwin"  ]]; then
+  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;31m\]\w\[\033[00m\]\$ '
+fi
 if [ -e /usr/share/terminfo/x/xterm-256color ]; then
   export TERM='xterm-256color'
 else
@@ -38,7 +40,7 @@ fi
 # virtualenvwrapper
 export VIRTENVWRAPPER=/usr/local/bin/virtualenvwrapper.sh
 export WORKON_HOME=~/.virtualenvs
-if [ "$(uname)" == "Darwin"  ]; then
+if [[ "$(uname)" = "Darwin"  ]]; then
   export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 else
   export VIRTUALENVWRAPPER_PYTHON=$python3/python3
