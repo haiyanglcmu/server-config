@@ -14,10 +14,12 @@ if [ "$(uname)" == "Darwin"  ]; then
 else
     opt_dir=/home/$USER/opt
     python_version=3.5.0
+    
     python3=$opt_dir/python$python_version/bin
     vim=$opt_dir/vim74/bin
 
     export PATH=$vim:$python3:$PATH
+    export LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
 fi
 
 export GREP_OPTIONS='--color=auto'

@@ -48,8 +48,8 @@ set guifont=Literation\ Mono\ Powerline:h16
 
 set t_Co=256
 syntax enable
-set background=light
-colo distinguished
+set background=dark
+colo gruvbox
 
 set fileformats=unix,dos,mac
 set history=700
