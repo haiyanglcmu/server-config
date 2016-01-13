@@ -49,7 +49,7 @@ set guifont=Literation\ Mono\ Powerline:h16
 set t_Co=256
 syntax enable
 set background=dark
-colo gruvbox
+colo distinguished
 
 set fileformats=unix,dos,mac
 set history=700
@@ -121,6 +121,8 @@ nnoremap <Down>   5<C-e>
 nnoremap <Up>     5<C-y>
 nnoremap <C-j> 5j
 nnoremap <C-k> 5k
+inoremap <C-j> 5j
+inoremap <C-k> 5k
 
 " 移动到屏幕最后一行
 function! GotoLastLineOnScreen()
@@ -178,7 +180,7 @@ nnoremap <leader>rl "_S<esc>
 """"
 " 查找替换
 
-vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+" vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " 替换所有
 function! ReplaceAll()
@@ -275,7 +277,7 @@ function! Refactor()
 endfunction
 
 " rename
-nmap <leader>rn "zyiw:call Refactor()<cr>mx:silent! norm gd<cr>[{V%:s/<C-R>//<c-r>z/g<cr>`x
+" nmap <leader>rn "zyiw:call Refactor()<cr>mx:silent! norm gd<cr>[{V%:s/<C-R>//<c-r>z/g<cr>`x
 
 """"
 " splits, tabs, buffers

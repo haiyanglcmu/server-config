@@ -100,57 +100,9 @@ let g:neocomplete#sources#vim#complete_functions = {
 " call neocomplete#custom#source('look', 'min_pattern_length', 4)
 " call neocomplete#custom#source('_', 'sorters', [])
 
-" mappings."{{{
-" <C-f>, <C-b>: page move.
-inoremap <expr><C-f>  pumvisible() ? "\<PageDown>" : "\<Right>"
-inoremap <expr><C-b>  pumvisible() ? "\<PageUp>"   : "\<Left>"
-" <C-y>: paste.
-inoremap <expr><C-y>  pumvisible() ? neocomplete#close_popup() :  "\<C-r>\""
-" <C-e>: close popup.
-inoremap <expr><C-e>  pumvisible() ? neocomplete#cancel_popup() : "\<End>"
-" <C-k>: unite completion. --> this is used by neosnippet
-" imap <C-k>  <Plug>(neocomplete_start_unite_complete)
-
-" <C-h>, <BS>: close popup and delete backword char.
-" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-" <C-n>: neocomplete.
-inoremap <expr><C-n>  pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>\<Down>"
-" <C-p>: keyword completion.
-inoremap <expr><C-p>  pumvisible() ? "\<C-p>" : "\<C-p>\<C-n>"
-inoremap <expr>'  pumvisible() ? neocomplete#close_popup() : "'"
-
-inoremap <expr><C-x><C-f>
-      \ neocomplete#start_manual_complete('file')
-
-inoremap <expr><C-g>     neocomplete#undo_completion()
-"" inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplete#smart_close_popup() . "\<CR>"
-endfunction
-
-" <TAB>: completion.
-" inoremap <silent><expr><TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ neocomplete#start_manual_complete()
 function! s:check_back_space() "{{{
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction"}}}
-" <S-TAB>: completion back.
-" inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" For cursor moving in insert mode(Not recommended)
-inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-"}}}
-
 
 let g:neocomplete#fallback_mappings = ["\<C-x>\<C-o>", "\<C-x>\<C-n>"]

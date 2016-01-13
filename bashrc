@@ -11,6 +11,7 @@ if [[ "$(uname)" = "Darwin"  ]]; then
     alias work='cd $WORK && ll'
     alias desktop='cd $DESKTOP && ll'
     alias reconfig='. ~/.zshrc'
+    alias dropbox='cd $DROPBOX && ll'
 else
     opt_dir=/home/$USER/opt
     python_version=3.5.0

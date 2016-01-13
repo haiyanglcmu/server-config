@@ -5,13 +5,6 @@ if neobundle#tap('neocomplete.vim') "{{{
   call neobundle#untap()
 endif "}}}
 
-if neobundle#tap('neosnippet.vim') "{{{
-  let neobundle#hooks.on_source =
-    \ '~/.vim/rc/plugins/neosnippet.rc.vim'
-  
-  call neobundle#untap()
-endif "}}}
-
 if neobundle#tap('vim-auto-save') "{{{
   let g:auto_save = 1
   " let g:auto_save_no_updatetime = 1
