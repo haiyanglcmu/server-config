@@ -2,7 +2,8 @@
 if [[ "$(uname)" = "Darwin"  ]]; then
     maven=~/opt/apache-maven-3.3.3/bin
     activator=~/opt/activator-dist-1.3.6
-    export PATH=$activator:$maven:$PATH
+    gradle=~/opt/gradle
+    export PATH=$PATH:$gradle:$activator:$maven
     export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home
     export DROPBOX=~/Dropbox
     export WORK="$DROPBOX/Projects"
