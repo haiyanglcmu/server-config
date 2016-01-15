@@ -13,6 +13,11 @@ cd LuaJIT-2.0.4
 export LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
 make && sudo make install
 
+python_version=3.5.0
+python_install_dir=$home_dir/opt/python$python_version
+python_config_dir=$python_install_dir/lib/python3.5/config-3.5m/
+export PATH=$python_install_dir/bin:$PATH
+
 vim_url=ftp://ftp.vim.org/pub/vim/unix/vim-7.4.tar.bz2
 vim_src=vim-7.4.tar.bz2
 vim_src_dir=vim74

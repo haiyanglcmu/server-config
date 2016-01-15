@@ -13,9 +13,9 @@ NeoBundle 'Shougo/vimproc.vim', {
       \    },
       \ }
 
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/neocomplete.vim', { 'insert'  : 1 }
+" NeoBundle 'Shougo/neosnippet.vim'
+" NeoBundle 'Shougo/neosnippet-snippets'
+" NeoBundle 'Shougo/neocomplete.vim', { 'insert'  : 1 }
 
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'tmhedberg/matchit'
