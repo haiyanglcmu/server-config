@@ -1,25 +1,66 @@
-""""
-" 加载、配置插件 plugins
-
-" 加载外部配置文件
-function! s:source_rc(path)
-  execute 'source' fnameescape(expand('~/.vim/rc/' . a:path))
-endfunction
-
-if has('vim_starting')
-  set nocp " 不兼容模式
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
+" Install plugins
+if &compatible
+  set nocompatible
 endif
+set runtimepath+=~/server-config/vimfiles/dein/repos/github.com/Shougo/dein.vim
 
-call neobundle#begin(expand('~/.vim/bundle/'))
-call s:source_rc('neobundle.rc.vim')
-call neobundle#end()
+call dein#begin(expand('~/.cache/dein'))
 
-NeoBundleCheck
+call dein#add('~/server-config/vimfiles/dein/repos/github.com/Shougo/dein.vim/')
+call dein#add('Shougo/neocomplete.vim')
+call dein#add('Shougo/vimshell.vim')
+call dein#add('vim-airline/vim-airline')
+call dein#add('jiangmiao/auto-pairs')
+call dein#add('kien/ctrlp.vim')
+call dein#add('scrooloose/nerdtree')
+call dein#add('tmhedberg/matchit')
+call dein#add('jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}})
+call dein#add('tpope/vim-commentary')
+call dein#add('tpope/vim-surround')
+call dein#add('tpope/vim-repeat')
+call dein#add('bkad/CamelCaseMotion', {'mappings':'<Plug>'})
+call dein#add('vim-scripts/vim-auto-save')
+call dein#add('vim-scripts/bufkill.vim')
+call dein#add('walm/jshint.vim')
+call dein#end()
 
-" 插件配置
-call s:source_rc('plugins.rc.vim')
-call neobundle#call_hook('on_source')
+filetype plugin indent on
+
+let g:auto_save = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:ctrlp_working_path_mode = 'ra'
+
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
+sunmap ge
+
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'"
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -121,8 +162,8 @@ nnoremap <Down>   5<C-e>
 nnoremap <Up>     5<C-y>
 nnoremap <C-j> 5j
 nnoremap <C-k> 5k
-inoremap <C-j> 5j
-inoremap <C-k> 5k
+vnoremap <C-j> 5j
+vnoremap <C-k> 5k
 
 " 移动到屏幕最后一行
 function! GotoLastLineOnScreen()

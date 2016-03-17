@@ -1,20 +1,24 @@
-home_dir=/home/$USER
-config_dir=$home_dir/server-config
+bashrc=/etc/bashrc
+config_dir=/home/$USER/server-config
+str_bash="source $config_dir/bashrc.server"
 
-sudo yum install git -y
+echo "[INFO] configuring bashrc ..."
+if ! [[ $str_bash = $(tail -1 $bashrc) ]]; then
+  echo $str_bash | sudo tee --append $bashrc > /dev/null
+else
+  echo "[INFO] bashrc already configured ..."
+fi
+source $bashrc
+
+softwares=("git" "libffi" "libffi-devel" "tree" "ruby" "ruby-devel" \
+           "ncurses" "ncurses-devel" "lua" "lua-devel" "luajit" "zlib" "zlib-devel" \
+           "expat" "expat-devel" "openssl" "openssl-devel" "readline" "readline-devel" \
+           "sqlite-devel" "gdbm" "gdbm-devel" "xz" "xz-devel" "bzip2-devel" "tcl-devel" "pcre-devel")
 sudo yum groupinstall "Development Tools" -y
-sudo yum install libffi libffi-devel -y
-sudo yum install tree -y
-sudo yum install ruby ruby-devel -y
-sudo yum install ncurses ncurses-devel -y
-sudo yum install lua lua-devel luajit -y
-sudo yum install zlib zlib-devel -y
-sudo yum install expat expat-devel -y
-sudo yum install openssl openssl-devel -y
-sudo yum install ncurses ncurses-devel readline readline-devel sqlite-devel -y
-sudo yum install gdbm gdbm-devel xz xz-devel -y
-sudo yum install bzip2-devel tcl-devel -y
-sudo yum install pcre-devel -y
+for software in ${softwares[@]}
+do
+  sudo apt-get install $software -y || sudo yum install $software -y
+done
 
 mkdir -p ~/softwares
 
